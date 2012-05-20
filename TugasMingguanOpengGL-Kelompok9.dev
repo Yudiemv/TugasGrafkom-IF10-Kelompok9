@@ -12,13 +12,13 @@ ResourceIncludes=
 MakeIncludes=
 Compiler=
 CppCompiler=
-Linker=-lopengl32
+Linker=../../../../../Dev-Cpp/lib/libopengl32.a_@@_../../../../../Dev-Cpp/lib/libglu32.a_@@_../../../../../Dev-Cpp/lib/libglut32.a_@@_
 IsCpp=1
 Icon=
 ExeOutput=
 ObjectOutput=
 OverrideOutput=0
-OverrideOutputName=
+OverrideOutputName=TugasMingguanOpengGL-Kelompok9.exe
 HostApplication=
 Folders=
 CommandLine=
@@ -27,7 +27,7 @@ CustomMakefile=
 IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
-CompilerSettings=
+CompilerSettings=0000000000000000000000
 
 [Unit1]
 FileName=main.cpp
