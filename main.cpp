@@ -16,9 +16,9 @@ void display(void){
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 glColor3f(1.0,1.0,1.0);
 glLoadIdentity();
-gluLookAt(0.0,10.0,5.0,0.0,0.0,0.0,0.0,1.0,0.0);
+gluLookAt(0.0,10.0,3.0,0.0,0.0,0.0,0.0,1.0,0.0);
 glutSwapBuffers();
-glutSolidSphere(2.0,20,20);
+glutSolidSphere(2.0,80,50);
 glutSolidCone(2.0,5.0,50,1);
 glFlush();
 }
