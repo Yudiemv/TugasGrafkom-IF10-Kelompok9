@@ -3,14 +3,14 @@
 #include <GL/gl.h>
 #include <GL/glut.h>
 
-GLfloat redDiffuseMaterial[] = {1.0, 0.0, 0.0}; //set the material to red
-GLfloat whiteSpecularMaterial[] = {1.0, 1.0, 1.0}; //set the material to white
-GLfloat greenEmissiveMaterial[] = {0.0, 1.0, 0.0}; //set the material to green
-GLfloat whiteSpecularLight[] = {1.0, 1.0, 1.0}; //set the light specular to white
-GLfloat blackAmbientLight[] = {0.0, 0.0, 0.0}; //set the light ambient to black
-GLfloat whiteDiffuseLight[] = {1.0, 1.0, 1.0}; //set the diffuse light to white
-GLfloat blankMaterial[] = {0.0, 0.0, 0.0}; //set the diffuse light to white
-GLfloat mShininess[] = {128}; //set the shininess of the material
+GLfloat redDiffuseMaterial[] = {1.0, 0.5, 0.3};
+GLfloat whiteSpecularMaterial[] = {1.0, 1.0, 1.0};
+GLfloat greenEmissiveMaterial[] = {0.0, 1.0, 0.0};
+GLfloat whiteSpecularLight[] = {1.0, 1.0, 1.0};
+GLfloat blackAmbientLight[] = {0.0, 0.0, 0.0};
+GLfloat whiteDiffuseLight[] = {1.0, 1.0, 1.0};
+GLfloat blankMaterial[] = {0.0, 0.0, 0.0};
+GLfloat mShininess[] = {128};
 
 bool diffuse = false;
 bool emissive = false;
@@ -38,7 +38,7 @@ glLoadIdentity();
 gluLookAt(0.0,10.0,3.0,0.0,0.0,0.0,0.0,1.0,0.0);
 light();
 glutSolidSphere(2.0,80,50);
-glutSolidCone(2.0,5.0,50,1);
+glutSolidCone(2.0,5.5,50,1);
 glutSwapBuffers();
 glFlush();
 }
