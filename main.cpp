@@ -7,16 +7,19 @@
 void init(void){
 glClearColor(0.0,0.0,0.0,0.0);
 glShadeModel(GL_FLAT);
+glEnable (GL_DEPTH_TEST);
+glEnable (GL_LIGHTING);
+glEnable (GL_LIGHT0);
 }
 
 void display(void){
-glClear(GL_COLOR_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 glColor3f(1.0,1.0,1.0);
 glLoadIdentity();
 gluLookAt(0.0,10.0,5.0,0.0,0.0,0.0,0.0,1.0,0.0);
-
-glutWireSphere(2.0,20,20);
-glutWireCone(2.0,5.0,50,1);
+glutSwapBuffers();
+glutSolidSphere(2.0,20,20);
+glutSolidCone(2.0,5.0,50,1);
 glFlush();
 }
 
