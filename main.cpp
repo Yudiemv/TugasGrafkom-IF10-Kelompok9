@@ -3,6 +3,9 @@
 #include <GL/gl.h>
 #include <GL/glut.h>
 
+int w=1024, h=720, z=0;
+int x1=0, y1=0, sudut=0, z1=0, skalaX=0, skalaY=0;
+
 GLfloat redDiffuseMaterial[] = {1.0, 0.5, 0.3};
 GLfloat whiteSpecularMaterial[] = {1.0, 1.0, 1.0};
 GLfloat greenEmissiveMaterial[] = {0.0, 1.0, 0.0};
@@ -33,12 +36,39 @@ void light (void) {
 
 void display(void){
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-glColor3f(1.0,1.0,1.0);
 glLoadIdentity();
+
 gluLookAt(0.0,10.0,3.0,0.0,0.0,0.0,0.0,1.0,0.0);
 light();
-glutSolidSphere(2.0,80,50);
-glutSolidCone(2.0,5.5,50,1);
+
+glTranslatef(0,z,0);
+glRotatef(sudut,x1,y1,z1);
+
+glutSolidSphere(2.0,20,50);
+
+glPushMatrix();
+glTranslatef(0,0,2.9);
+glScalef(1,1,0.5);
+glutSolidTorus(0.19,0.20,20,50);
+glPopMatrix();
+
+glPushMatrix();
+glTranslatef(0,0,3.2);
+glScalef(1,1,0.25);
+glutSolidTorus(0.19,0.20,20,50);
+glPopMatrix();
+
+glPushMatrix();
+glTranslatef(0,0,3.43);
+glScalef(1,1,0.6);
+glutSolidCube(0.6);
+glPopMatrix();
+
+glPushMatrix();
+glTranslatef(0,0,1);
+glutSolidCone(1.734,2,20,50);
+glPopMatrix();
+
 glutSwapBuffers();
 glFlush();
 }
@@ -95,6 +125,40 @@ void keyboard (unsigned char key, int x, int y) {
             glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, blankMaterial);
         }
     }
+    if (key == 'x')
+    {
+        x1=1;
+        y1=0;
+        z1=0;
+        sudut+=10;
+    }
+    if (key == 'y')
+    {
+        y1=1;
+        x1=0;
+        z1=0;
+        sudut+=10;
+    }
+    if (key == 'z')
+    {
+        y1=0;
+        x1=0;
+        z1=1;
+        sudut+=10;
+    }
+}
+
+void mySpecialKeyboard(int key, int x, int y)
+{
+    switch(key)
+    {
+    case GLUT_KEY_UP:
+        z+=1;
+        break;
+    case GLUT_KEY_DOWN:
+        z-=1;
+        break;
+    }
 }
 
 int main(int argc, char** argv){
@@ -108,6 +172,7 @@ glutDisplayFunc(display);
 glutIdleFunc(display);
 glutReshapeFunc(reshape);
 glutKeyboardFunc (keyboard);
+glutSpecialFunc(mySpecialKeyboard);
 glutMainLoop();
 return 0;
 }
