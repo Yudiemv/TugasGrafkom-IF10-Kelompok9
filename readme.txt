@@ -15,5 +15,7 @@ Key:
 Z: Rotasi objek dari sumbu z
 X: Rotasi objek dari sumbu x
 Y: Rotasi objek dari sumbu y
-Up: Zoom out
-Down: Zoom in
+Up: Zoom in
+Down: Zoom out
+
+Nyoba nambahin texture tapi masih kacau, hahaa. Ayo coba-coba lagi

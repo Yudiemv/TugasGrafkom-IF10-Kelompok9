@@ -1,10 +1,48 @@
 #include <stdio.h>
+#include <windows.h>
 #include <GL/glu.h>
 #include <GL/gl.h>
 #include <GL/glut.h>
 
+
 int w=1024, h=720, z=0;
 int x1=0, y1=0, sudut=0, z1=0, skalaX=0, skalaY=0;
+
+GLuint texture; //array untuk texture
+
+GLuint LoadTexture( const char * filename, int width, int height )
+{
+GLuint texture;
+unsigned char * data;
+FILE * file;
+
+file = fopen( filename, "rb" );
+if ( file == NULL ) return 0;
+data = (unsigned char *)malloc( width * height * 3 );
+fread( data, width * height * 3, 1, file );
+fclose( file );
+
+glGenTextures( 1, &texture );
+glBindTexture( GL_TEXTURE_2D, texture );
+glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
+
+glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
+glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR );
+
+glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+
+gluBuild2DMipmaps( GL_TEXTURE_2D, 3, width, height, GL_RGB, GL_UNSIGNED_BYTE, data );
+free( data ); //free the texture
+return texture; //return whether it was successfull
+}
+
+void FreeTexture( GLuint texture )
+{
+glDeleteTextures( 1, &texture );
+}
+
+
 
 GLfloat redDiffuseMaterial[] = {1.0, 0.5, 0.3};
 GLfloat whiteSpecularMaterial[] = {1.0, 1.0, 1.0};
@@ -39,11 +77,18 @@ glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 glLoadIdentity();
 
 gluLookAt(0.0,10.0,3.0,0.0,0.0,0.0,0.0,1.0,0.0);
+
+glEnable( GL_TEXTURE_2D ); //enable 2D texturing
+glEnable(GL_TEXTURE_GEN_S);
+glEnable(GL_TEXTURE_GEN_T);
 light();
 
 glTranslatef(0,z,0);
 glRotatef(sudut,x1,y1,z1);
 
+//Balon
+texture = LoadTexture( "lines.raw", 256, 256 );
+glBindTexture( GL_TEXTURE_2D, texture );
 glutSolidSphere(2.0,20,50);
 
 glPushMatrix();
@@ -53,21 +98,30 @@ glutSolidTorus(0.19,0.20,20,50);
 glPopMatrix();
 
 glPushMatrix();
+glTranslatef(0,0,1);
+glutSolidCone(1.734,2,20,50);
+glPopMatrix();
+
+FreeTexture( texture );
+
+//Kotak dibawah balon
+glPushMatrix();
 glTranslatef(0,0,3.2);
 glScalef(1,1,0.25);
 glutSolidTorus(0.19,0.20,20,50);
 glPopMatrix();
 
+
 glPushMatrix();
 glTranslatef(0,0,3.43);
 glScalef(1,1,0.6);
+texture = LoadTexture( "Box.raw", 256, 256 );
+glBindTexture( GL_TEXTURE_2D, texture );
 glutSolidCube(0.6);
+FreeTexture( texture );
 glPopMatrix();
 
-glPushMatrix();
-glTranslatef(0,0,1);
-glutSolidCone(1.734,2,20,50);
-glPopMatrix();
+
 
 glutSwapBuffers();
 glFlush();
