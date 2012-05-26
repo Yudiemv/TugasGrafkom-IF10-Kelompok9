@@ -10,3 +10,10 @@ Ahmad Mugeni - 10108493 (muggii)
 
 		--REVISI--
 Daripada bingung objek icecream dirubah jadi apa, mungkin dirubah jadi balon udara aja ya. Berhubung tugas besar juga nanti judulnya balon udara. Jadi hitung-hitung nyicil buat tugas besar.
+
+Key:
+Z: Rotasi objek dari sumbu z
+X: Rotasi objek dari sumbu x
+Y: Rotasi objek dari sumbu y
+Up: Zoom out
+Down: Zoom in
